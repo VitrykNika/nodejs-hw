@@ -16,7 +16,6 @@
   "keywords": [],
   "author": "Veronika_Vitryk <v.karpinska@ukr.net>",
   "license": "ISC",
-  
   "bugs": {
     "url": "https://github.com/VitrykNika/nodejs-hw/issues"
   },
@@ -29,8 +28,11 @@
     "pino-http": "^11.0.0"
   },
   "devDependencies": {
+    "@eslint/js": "^9.39.1",
     "eslint": "^9.39.1",
+    "globals": "^16.5.0",
     "nodemon": "^3.1.11",
+    "pino-pretty": "^13.1.2",
     "prettier": "^3.7.2"
   }
 }
