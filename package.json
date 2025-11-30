@@ -1,0 +1,36 @@
+{
+  "name": "nodejs-hw",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js",
+    "lint": "eslint .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VitrykNika/nodejs-hw.git"
+  },
+  "keywords": [],
+  "author": "Veronika_Vitryk <v.karpinska@ukr.net>",
+  "license": "ISC",
+  
+  "bugs": {
+    "url": "https://github.com/VitrykNika/nodejs-hw/issues"
+  },
+  "homepage": "https://github.com/VitrykNika/nodejs-hw#readme",
+  "description": "",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "pino-http": "^11.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^9.39.1",
+    "nodemon": "^3.1.11",
+    "prettier": "^3.7.2"
+  }
+}
