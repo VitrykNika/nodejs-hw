@@ -1,43 +1,27 @@
-# Node.js Homework - Express Basics
+📝 Notes API
 
-## 📌 Project Description
+Простий REST API для роботи з нотатками (CRUD).
+Технології: Node.js, Express, MongoDB, Mongoose.
 
-This project is a simple Express.js server built as part of the Node.js course homework.
-It demonstrates the basic setup of a web server using:
+🚀 Запуск
 
-- Express.js
-- CORS middleware
-- JSON request body parsing
-- pino-http logger
-- Environment variables with dotenv
+1️⃣ Створити .env
+MONGO_URL=your-mongo-url
+PORT=3000
 
----
-
-## 🚀 Available Routes
-
-| Method | Endpoint         | Description                                      | Response                                        |
-| ------ | ---------------- | ------------------------------------------------ | ----------------------------------------------- |
-| GET    | `/notes`         | Returns a message simulating all notes retrieval | `{ "message": "Retrieved all notes" }`          |
-| GET    | `/notes/:noteId` | Returns a message with a note ID                 | `{ "message": "Retrieved note with ID: <id>" }` |
-| GET    | `/test-error`    | Simulates a server error                         | `{ "message": "Test error" }`                   |
-
----
-
-## ⚙️ Middleware Implemented
-
-✔ `cors` — allows cross-origin requests
-✔ `express.json()` — parses JSON request body
-✔ `pino-http` — logs all incoming HTTP requests
-✔ Custom 404 middleware — handles unknown routes
-✔ Error handling middleware — catches server errors
-
----
-
-## 🔧 Installation and Running
-
-```bash
-git clone https://github.com/<your-username>/nodejs-hw.git
-cd nodejs-hw
+2️⃣ Встановити залежності
 npm install
+
+3️⃣ Запустити сервер
 npm run dev
-```
+
+📌 Маршрути
+
+GET /notes — отримати всі нотатки
+GET /notes/:id — отримати нотатку
+POST /notes — створити
+PATCH /notes/:id — оновити
+DELETE /notes/:id — видалити
+
+🗂 Модель Note
+title, content, tag, createdAt, updatedAt
