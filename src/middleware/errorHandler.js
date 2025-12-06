@@ -1,8 +1,15 @@
+import { isHttpError } from 'http-errors';
+
 export const errorHandler = (err, req, res, next) => {
   console.error(err);
 
-  const status = err.status || 500;
-  const message = err.message || 'Server error';
+  if (isHttpError(err)) {
+    return res.status(err.status).json({
+      message: err.message,
+    });
+  }
 
-  res.status(status).json({ message, });
+  res.status(500).json({
+    message: 'Server error',
+  });
 };

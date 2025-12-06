@@ -29,10 +29,10 @@ const noteSchema = new Schema(
       ],
       default: 'Todo',
       trim: true,
+    },
   },
- },
   {
-    timestamps: true, 
+    timestamps: true,
   },
 );
 
