@@ -4,7 +4,6 @@ import { upload } from '../middleware/multer.js';
 import { updateUserAvatar } from '../controllers/userController.js';
 
 const router = Router();
-
 router.patch(
   '/users/me/avatar',
   authenticate,

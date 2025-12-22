@@ -12,10 +12,11 @@ const transporter = nodemailer.createTransport({
 });
 
 if (process.env.NODE_ENV !== "production") {
-  transporter.verify((err, success) => {
-    if (err) console.error("SMTP VERIFY ERROR:", err);
-    else console.log("SMTP VERIFY OK:", success);
-  });
+ transporter.verify((err) => {
+  if (err) {
+    console.error(err);
+  }
+});
 }
 
 export const sendEmail = (options) => transporter.sendMail(options);
