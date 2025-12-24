@@ -19,4 +19,6 @@ if (process.env.NODE_ENV !== "production") {
 });
 }
 
-export const sendEmail = (options) => transporter.sendMail(options);
+export const sendEmail = async (options) => {
+  return await transporter.sendMail(options);
+};

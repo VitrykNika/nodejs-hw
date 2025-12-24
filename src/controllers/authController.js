@@ -157,3 +157,40 @@ export const requestResetEmail = async (req, res, next) => {
     next(error);
   }
 };
+
+export const resetPassword = async (req, res, next) => {
+  try {
+    const { token, password } = req.body;
+
+    let payload;
+    try {
+      payload = jwt.verify(token, process.env.JWT_SECRET);
+    } catch {
+      return next(createHttpError(401, "Token is invalid or expired"));
+    }
+
+    if (typeof payload !== "object" || !payload?.sub) {
+      return next(createHttpError(401, "Token is invalid or expired"));
+    }
+
+    const userId = payload.sub;
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const user = await User.findByIdAndUpdate(
+      userId,
+      { password: hashedPassword },
+      { new: true }
+    );
+
+    if (!user) {
+      return next(createHttpError(404, "User not found"));
+    }
+
+    await Session.deleteMany({ userId });
+
+    return res.status(200).json({ message: "Password has been reset successfully" });
+  } catch (error) {
+    next(error);
+  }
+};
