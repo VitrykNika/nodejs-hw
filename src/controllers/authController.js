@@ -41,7 +41,7 @@ export const loginUser = async (req, res, next) => {
 
     const user = await User.findOne({ email });
     if (!user) {
-      return next(createHttpError(401, 'Invalid credentials'));
+      return next(createHttpError(404, 'User not found'));
     }
 
     const isValidPassword = await bcrypt.compare(password, user.password);
@@ -169,16 +169,16 @@ export const resetPassword = async (req, res, next) => {
       return next(createHttpError(401, "Token is invalid or expired"));
     }
 
-    if (typeof payload !== "object" || !payload?.sub) {
+    if (typeof payload !== "object" || !payload?.sub || !payload?.email) {
       return next(createHttpError(401, "Token is invalid or expired"));
     }
 
     const userId = payload.sub;
-
+    const email = payload.email;
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const user = await User.findByIdAndUpdate(
-      userId,
+    const user = await User.findOneAndUpdate(
+      { _id: userId, email },
       { password: hashedPassword },
       { new: true }
     );
@@ -187,7 +187,7 @@ export const resetPassword = async (req, res, next) => {
       return next(createHttpError(404, "User not found"));
     }
 
-    await Session.deleteMany({ userId });
+    await Session.deleteMany({ userId: user._id });
 
     return res.status(200).json({ message: "Password has been reset successfully" });
   } catch (error) {
