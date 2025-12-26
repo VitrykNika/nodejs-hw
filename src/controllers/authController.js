@@ -41,7 +41,7 @@ export const loginUser = async (req, res, next) => {
 
     const user = await User.findOne({ email });
     if (!user) {
-      return next(createHttpError(404, 'User not found'));
+      return next(createHttpError(401, 'User not found'));
     }
 
     const isValidPassword = await bcrypt.compare(password, user.password);
@@ -184,7 +184,7 @@ export const resetPassword = async (req, res, next) => {
     );
 
     if (!user) {
-      return next(createHttpError(401, "User not found"));
+      return next(createHttpError(404, "User not found"));
     }
 
     await Session.deleteMany({ userId: user._id });
